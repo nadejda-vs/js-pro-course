@@ -2,6 +2,14 @@
  * Сделайте промис, внутри которого будет задержка setTimeout в 3
  * секунды, после которой промис должен зарезолвится (то есть выполнится успешно).
  * */
+let promise =new Promise((resolve,reject)=>{
+setTimeout(() => {
+    resolve("result");
+}, 1000);
+})
+
+
+// or can be done like this:
 // const delay = (ms) => new Promise(
 //   (resolve) => setTimeout(resolve, ms)
 // );
@@ -16,6 +24,14 @@
  * Сделайте промис, внутри которого будет задержка setTimeout в 3 секунды,
  * после которой промис должен зареджектится (то есть выполнится с ошибкой).
  */
+let promiseSecond =new Promise((resolve,reject)=>{
+setTimeout(() => {
+   reject("Error!!!!");
+}, 1000);
+})
+
+
+// or can be done like this:
 // Promise.reject(new Error).then(function(success) {
 //   // не вызывается
 // }, function(error) {
@@ -29,24 +45,24 @@
  */
 
 
-// function getRandomNumber() {
-//       return Math.round(Math.random() * 10); 
-// }
-// let promise = new Promise((resolve, reject) => {
-//       let randomNumber = getRandomNumber();
+function getRandomNumber() {
+      return Math.round(Math.random() * 10); 
+}
+let promiseRandom = new Promise((resolve, reject) => {
+      let randomNumber = getRandomNumber();
 
-//        setTimeout(() => {
-//             if(randomNumber >= 1 && randomNumber <= 5) {
-//                  resolve('WAW!!!Success!!') 
-//             } else if(randomNumber >= 6 && randomNumber <= 10) {
-//                  reject('Erorr')
-//             }
-//        }, randomNumber*1000)
-// })
-// .then(() => {
-//     console.log('WAW!!!Success!!')
-//   })
-// .catch(()=>{console.log('Error');})
+       setTimeout(() => {
+            if(randomNumber >= 1 && randomNumber <= 5) {
+                 resolve() 
+            } else if(randomNumber >= 6 && randomNumber <= 10) {
+                 reject()
+            }
+       }, randomNumber*1000)
+})
+.then(() => {
+    console.log('WAW!!!Success!!')
+  })
+.catch(()=>{console.log('Error');})
 
 
 /**
@@ -55,99 +71,30 @@
  * С помощью Promise.all получите массив результатов, найдите его сумму, выведите на экран.
  */
 
-
-
-function getNumberRandom() {
+function getNumberRandomOne() {
     return Math.floor(Math.random()*6)
 }
 
-let numberTime=getNumberRandom();
-let promiseFirst= new Promise((resolve,reject)=>{
-// console.log(numberTime);
-setTimeout(() => {
-       if(numberTime >= 1 && numberTime <= 5) {
-                 resolve() 
-            } else if(numberTime >= 6 ) {
-                 reject()
-}
-            }, numberTime*1000);
-})
-.then(()=>{
-console.log(numberTime);
-})
-.catch(()=>{console.log('Error');})
-function getNumberRandom2() {
-    return Math.floor(Math.random()*6)
-}
-let numberSecond=getNumberRandom2()
-let promiseSecond= new Promise((resolve,reject)=>{
-
-setTimeout(() => {
-       if(numberTime >= 1 && numberSecond <= 5) {
-                 resolve() 
-            } else if(numberSecond >= 6 ) {
-                 reject()
-}
-            }, numberSecond*1000);
-})
-.then(()=>{
-console.log(numberTime);
-})
-.catch(()=>{console.log('Error');})
-console.log(numberSecond);
-function getNumberRandom3() {
-    return Math.floor(Math.random()*6)
-}
-let numberThird=getNumberRandom3()
-console.log(numberThird);
+let numberTimeFirst=getNumberRandomOne();
+let numberTimeSecond=getNumberRandomOne();
+let numberTimeThird=getNumberRandomOne();
+let counter=0;
 Promise.all([
-  new Promise(resolve => setTimeout(() => resolve(numberTime), numberTime*1000)),
-  new Promise(resolve => setTimeout(() => resolve(numberSecond), numberSecond*1000)), 
-  new Promise(resolve => setTimeout(() => resolve(numberThird), numberThird*1000))  
+  new Promise(resolve => setTimeout(() => resolve(numberTimeFirst), numberTimeFirst*1000)),
+  new Promise(resolve => setTimeout(() => resolve(numberTimeSecond), numberTimeSecond*1000)), 
+  new Promise(resolve => setTimeout(() => resolve(numberTimeThird), numberTimeThird*1000))  
 ])
-.then(result=> {console.log(result);});
-console.log(result[0]+result[1]+result[2]);
-// Array[i].reduce(function(accumulator, currentValue, index, array) {
-//   return accumulator + currentValue;
-// }, 10);
-
-// let numberTime2=getNumberRandom2();
-// let promiseSecond= new Promise((resolve,reject)=>{
-// // console.log(numberTime2);
-// setTimeout(() => {
-//        if(numberTime2 >= 1 && numberTime2 <= 5) {
-//                  resolve() 
-//             } else if(numberTime2 >= 6 ) {
-//                  reject()
-// }
-//             }, numberTime2*1000);
-// })
-// .then(()=>{
-// console.log(numberTime2);
-// })
-// .catch(()=>{console.log('Error');})
-
-
-
-// function getNumberRandom3() {
-//     return Math.floor(Math.random()*6)
-// }
-// let numberTime3=getNumberRandom3();
-// let promiseThird= new Promise((resolve,reject)=>{
-// // console.log(numberTime3);
-// setTimeout(() => {
-//        if(numberTime3 >= 1 && numberTime3 <= 5) {
-//                  resolve() 
-//             } else if(numberTime3 >= 6 ) {
-//                  reject()
-// }
-//             }, numberTime3*1000);
-// })
-// .then(()=>{
-// console.log(numberTime3);
-// })
-// .catch(()=>{console.log('Error');})
-
+.then((value)=> 
+(
+	value.reduce((acc, item) => {
+		counter++;
+		acc += item;
+		if (counter === 3) {
+			console.log(acc);
+		}
+		return acc;
+	}, 0)
+))
 
 
 /**
@@ -155,10 +102,79 @@ console.log(result[0]+result[1]+result[2]);
  * Отфильтровать массив пользователей, чтобы остались только пользователи с четными  id.
  */
 
-// fetch('https://jsonplaceholder.typicode.com/users'); 
-// .then((value)=>{
-// return value.json();
-// });
-// .then((response)=>{
+fetch('https://jsonplaceholder.typicode.com/users')
+.then((value) => {
+	return value.json();
+})
+.then((response) => {
+	let array = response;
+	let arrayNew = array.filter((element) => {
+		if(element.id % 2 == 0) {
+			return element;
+		}
+	})
+	console.log(arrayNew);
+})
 
-// })
+
+/**
+ * Написать цикл, который будет итерироватся от 1 до 100.
+ * На каждой итерации цикла нужно проверить:
+ * если число кратное 3 - то вывести в консоль строку Fizz,
+ * если число кратное 5 - то вывести в консоль строку Buzz,
+ * если число кратное и 3 и 5 - то вывести FizzBuzz
+ */
+for (let num = 1; num < 101; num++) {
+    if (num % 3 === 0) {
+        console.log('Fizz');
+    }
+    else if (num % 5 === 0) {
+        console.log('Buzz');
+    }
+    else if (num % 3 && num % 5  === 0) {
+        console.log('FizzBuzz');
+    }
+}
+/**
+ * Нарисовать прямоугольный треугольник с длинной катетов i (любое число больше 1).
+ * Для рисования использовать символ *(звездочка) или %(знак процента) и консоль.
+ * Пример вывода:
+ *
+ **
+ ***
+ ****
+ *****
+ ******
+ */
+let count = 15;
+let str = ' ';
+let star = '*';
+
+for(let i = 0; i < count; i++) {
+	str += star;
+	console.log(str);
+}
+/**
+ * Необходимо создать массив из 15 элементов. В массиве обязательно должны быть одинаковые значения.
+ * Напишите код, который уберет эти дубликаты из созданного массива.
+ */
+let array=[1,5,29,1,2,29,3,5,9]
+function getArrayNew(arr) {
+    return arr.filter((element,index,a)=>a.indexOf(element) ===index)
+}
+console.log(getArrayNew(array));
+
+
+/**
+ * Напишите код, который подсчитает количество повторяющихся элементов в массиве.
+ * И вывести это количество в консоль.
+ */
+
+var arraySecond = [1, 1,5, 29, 1, 2, 29, 3, 5, 9].map((name) => {
+  return {count: 1, name: name}
+})
+.reduce((a, b) => {
+  a[b.name] = (a[b.name] || 0) + b.count
+  return a
+}, {})
+console.log(arraySecond);
