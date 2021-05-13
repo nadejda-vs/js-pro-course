@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MYYYYY TEST</title>
+</head>
+
+<body>
+    <script>
+
+        class testQuestionObj {
+            constructor() { }
+            askText;
+            answerTextArray = new Array();
+            rightAnswers = new Array();
+        }
+
+        const arrayQuestion = new Array();
+        let buttonAdd = document.createElement("button");
+        buttonAdd.innerHTML = "Добавить вопрос";
+        //buttonAdd.disabled = true; задизэйблить кнопку
+
+        let buttonBeginTest = document.createElement("button");
+        let textNode = document.createTextNode("Начать тест");
+        buttonBeginTest.addEventListener("click", ShowTest);
+        buttonBeginTest.append(textNode);
+        document.body.append(buttonAdd, buttonBeginTest);
+
+        onCreated();
+
+
+        buttonAdd.addEventListener("click", () => {
+            addQuestion();
+        })
+
+
+
+        function onCreated() {
+
+            const testQuestion1 = new testQuestionObj();
+            testQuestion1.askText = 'Что из перeчисленного не является языком программирования';
+            testQuestion1.answerTextArray[0] = 'HTML';
+            testQuestion1.answerTextArray[1] = 'JAVA';
+            testQuestion1.answerTextArray[2] = 'PYTHON';
+            testQuestion1.answerTextArray[3] = 'CSS';
+
+            testQuestion1.rightAnswers[0] = 1;
+            testQuestion1.rightAnswers[1] = 4;
+
+            const testQuestion2 = new testQuestionObj();
+            testQuestion2.askText = 'Какой (какие) из перечисленных типов тестирования нельзя автоматизировать';
+            testQuestion2.answerTextArray[0] = 'UI тестирование';
+            testQuestion2.answerTextArray[1] = 'Юзабилити тестирование';
+            testQuestion2.answerTextArray[2] = 'Тестирование совместимости';
+            testQuestion2.answerTextArray[3] = 'Unit тестирование';
+            testQuestion2.rightAnswers[0] = 1;
+
+            const testQuestion3 = new testQuestionObj();
+            testQuestion3.askText = 'Какая (какие) из следующих конструкций используется (используются) для ветвления';
+            testQuestion3.answerTextArray[0] = 'switch case.';
+            testQuestion3.answerTextArray[1] = 'for';
+            testQuestion3.answerTextArray[2] = 'if else.';
+            testQuestion3.answerTextArray[3] = 'do while.';
+
+            testQuestion3.rightAnswers[0] = 1;
+            testQuestion3.rightAnswers[1] = 3;
+
+            const testQuestion4 = new testQuestionObj();
+            testQuestion4.askText = 'Выберите вариант (варианты) ответов, в котором (которых) приоритетность багов расположена от более низкой к более высокой';
+            testQuestion4.answerTextArray[0] = 'Blocker, Major, Trivial';
+            testQuestion4.answerTextArray[1] = 'Minor, Blocker, Critical';
+            testQuestion4.answerTextArray[2] = 'Trivial, Minor, Blocke';
+            testQuestion4.answerTextArray[3] = 'Trivial, Major, Critical';
+
+            testQuestion4.rightAnswers[0] = 3;
+            testQuestion4.rightAnswers[1] = 4;
+
+            const testQuestion5 = new testQuestionObj();
+            testQuestion5.askText = 'Что из перечисленного является примером тестирования';
+            testQuestion5.answerTextArray[0] = 'Несколько раз ввести неправильный кодот домофона';
+            testQuestion5.answerTextArray[1] = 'Попробовать зарядить iPhone зарядным устройством от телефона с операционной системой Android';
+            testQuestion5.answerTextArray[2] = 'Попытаться разогнать автомобиль выше скорости указанной на спидометре';
+            testQuestion5.answerTextArray[3] = 'Заварить кофе в холодной воде';
+
+            testQuestion5.rightAnswers[0] = 1;
+            testQuestion5.rightAnswers[1] = 2;
+            testQuestion5.rightAnswers[2] = 3;
+            testQuestion5.rightAnswers[3] = 4;
+
+
+            arrayQuestion.push(testQuestion1);
+            arrayQuestion.push(testQuestion2);
+            arrayQuestion.push(testQuestion3);
+            arrayQuestion.push(testQuestion4);
+            arrayQuestion.push(testQuestion5);
+        }
+
+        function addQuestion() {
+            const testQuestion = new testQuestionObj();
+            let askText = prompt("Введите текст вопроса:");
+
+            let result;
+            if (result == null) {
+                console.log('ksdk')
+            };
+            arrayQuestion.push(testQuestion);
+            if (!askText) {
+                alert(`Вы не ввели текст вопроса. Попробуйте добавить вопрос заново`);
+            }
+            testQuestion.askText = askText;
+
+
+            while (testQuestion.answerTextArray.length < 4) {
+                const text = prompt("Введите вариант ДОБАВИТЬ НОМЕР ответа");
+                if (!text) {
+                    alert(`Вы не ввели текст ДОБАВИТЬ НОМЕР  варианта. Попробуйте добавить вопрос заново`);
+                    break;
+                }
+                else testQuestion.answerTextArray.push(text);
+
+            }
+            if (testQuestion.answerTextArray.length < 4) {
+                addQuestion();
+
+            }
+            rightAnswers();
+            function rightAnswers() {
+                let correctNumbers = prompt(
+                    "Введите номера правильных ответов через запятую.Нумерация начинается с 1"
+                );
+                let splitCorrectNumbers = correctNumbers.split(",");
+
+                let isAllCorrect = splitCorrectNumbers.every((splitCorrectStr) => {
+                    let splitCorrectNumber = Number(splitCorrectStr);
+
+                    return (
+                        splitCorrectNumber && splitCorrectNumber <= 4 && splitCorrectNumber >= 1
+                    );
+                });
+
+                if (isAllCorrect) {
+                    splitCorrectNumbers.forEach(obj => {
+                        testQuestion.rightAnswers.push(+obj);
+                    });
+
+                }
+                else {
+                    alert(
+                        "Поле может содержать только уникальные цифры от 1,2,3,4, разделенные запятой.Попробуйте добавить вопрос заново"
+                    );
+                }
+            }
+        }
+
+
+
+        function ShowTest() {
+            showTemplateTest()
+            console.log(arrayQuestion);
+            addNewQuestion()
+            addButtonSubmit()
+            buttonAdd.disabled = true;
+            buttonBeginTest.disabled = true;
+        }
+
+
+
+        function addButtonSubmit() {
+            let buttonSubmit = document.createElement('button');
+            buttonSubmit.innerHTML = "Отправить";
+            document.body.append(buttonSubmit);
+            buttonSubmit.addEventListener('click', getCheckedCheckBoxes)
+
+            // CHECKED!
+            function getCheckedCheckBoxes() {
+                let counter = 0;
+                arrayQuestion.forEach((obj, index) => {
+                    let checkArray = new Array();
+                    let checkboxesIndex = document.getElementById(index);
+                    let checkboxes = checkboxesIndex.querySelectorAll("input");
+                    checkboxes.forEach(checkbox => {
+                        if (checkbox.checked) {
+                            checkArray.push(+checkbox.value);
+                        }
+                    })
+
+                    //console.log(obj.rightAnswers);
+                    //console.log(checkArray);
+                    if (JSON.stringify(obj.rightAnswers) === JSON.stringify(checkArray)) {
+                        counter++;
+                        console.log(``);
+                    }
+                    else console.log('неверно');
+                });
+            }
+        }
+
+        // to create a template for questions and answers
+        function addNewQuestion() {
+
+            arrayQuestion.forEach((element, index) => {
+
+                str = '<div id="' + index + '">' +
+
+                    '<h4>' + (index + 1) + '. ' + element.askText + '?</h4>' +
+                    '<p><label><input id="checkboxClass" type="checkbox" value="1">' + element.answerTextArray[0] + '</label></p>' +
+                    '<p><label><input  id="checkboxClass" type="checkbox" value="2">' + element.answerTextArray[1] + '</label></p>' +
+                    '<p><label><input  id="checkboxClass" type="checkbox" value="3">' + element.answerTextArray[2] + '</label></p>' +
+                    '<p><label><input  id="checkboxClass" type="checkbox" value="4">' + element.answerTextArray[3] + '</label></p>' +
+                    '</div >';
+                let templateQuestions = document.getElementById('templateQuestion')
+                templateQuestions.insertAdjacentHTML('beforeend', str);
+            });
+        }
+        function showTemplateTest() {
+            let showTemplateTest;
+            showTemplateTest = document.getElementById('templateQuestion');
+            showTemplateTest.style.display = (showTemplateTest.style.display == 'none') ? 'block' : 'none'
+        };
+
+
+    </script>
+    <form onsubmit="return checkAnswer()">
+        <div id='templateQuestion' style="display: none;">
+
+        </div>
+    </form>
+</body>
+
+</html>
