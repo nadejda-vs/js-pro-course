@@ -11,7 +11,7 @@ function App() {
         <FullName name="Nadya" secondName="Yakatsuk" />
         <Description
           information=" I'm learning in TeachMeSkills in position Frontend Developer. I have
-      knowlege in HTML5, CSS3, Git, JavaScript. Beginner in React."
+      knowlege in HTML5,  CSS3,  Git, JavaScript. Beginner in React."
         />
       </header>
     </div>
