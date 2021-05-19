@@ -1,5 +1,8 @@
 function FullName(props) {
-  return props.name + props.secondName;
+  return (
+    <p className="fullName">
+      Hi,my name is:{props.name} {props.secondName}
+    </p>
+  );
 }
-
 export default FullName;

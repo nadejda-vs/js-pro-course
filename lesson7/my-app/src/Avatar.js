@@ -1,5 +1,8 @@
 function Avatar(props) {
-  return <img src={props.src} alt="avatar" className="avatar"></img>;
+  return (
+    <div>
+      <img className="Avatar" src={props.src} alt="avatar" />;
+    </div>
+  );
 }
-
 export default Avatar;

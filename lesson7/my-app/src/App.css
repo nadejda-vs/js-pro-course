@@ -3,8 +3,6 @@
 }
 
 
-
-
 .App-header {
  background: linear-gradient(45deg, #F17C58, #E94584, #24AADB, #27DBB1, #FFDC18, #FF3706);
   min-height: 100vh;
@@ -13,7 +11,7 @@
   align-items: center;
   justify-content: center;
   font-size: 40px;
-  color: rgb(22, 20, 22);
+  color: rgb(19, 13, 19);
 }
 
 .App-link {

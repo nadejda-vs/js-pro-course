@@ -1,5 +1,4 @@
 function Description(props) {
-  return props.information;
+  return <p className="description">{props.information}</p>;
 }
-
 export default Description;
