@@ -7,7 +7,7 @@ function App() {
   return (
     <div className="App">
       <header className="App-header">
-        <Avatar src="./images/avatar.JPG" />
+        <Avatar src=" ./images/avatar.jpg"  />
         <FullName name="Nadya" secondName="Yakatsuk" />
         <Description
           information=" I'm learning in TeachMeSkills in position Frontend Developer. I have

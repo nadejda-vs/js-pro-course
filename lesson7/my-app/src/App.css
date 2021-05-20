@@ -13,6 +13,11 @@
   font-size: 40px;
   color: rgb(26, 23, 26);
 }
+.Avatar{
+
+width:300px;
+ height:450px;
+}
 
 .App-link {
   color: #61dafb;
