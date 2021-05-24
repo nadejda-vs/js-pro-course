@@ -1,0 +1,12 @@
+.App {
+  text-align: center;
+background: radial-gradient(circle farthest-corner at 100px 50px, #FBF2EB, #352A3B);
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: 50px;
+
+}
+
