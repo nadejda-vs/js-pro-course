@@ -1,0 +1,27 @@
+.App {
+  text-align: center;
+}
+
+
+.App-header {
+ background: linear-gradient(45deg, #F17C58, #E94584, #24AADB, #27DBB1, #FFDC18, #FF3706);
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: 40px;
+  color: rgb(69, 69, 212);
+}
+
+button{
+border-style:solid;
+padding: 10px 24px;
+width: 400px;
+ border-color: rgb(106, 106, 218);
+background: linear-gradient(180deg, rgb(247, 113, 184), rgb(235, 235, 242) 65%, rgb(109, 112, 231) 100%);
+ justify-content: center;
+font-size: 25px;
+border-radius: 10px;
+color: blue;
+}
