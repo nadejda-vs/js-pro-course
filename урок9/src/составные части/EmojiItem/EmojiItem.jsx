@@ -6,8 +6,7 @@ export const EmojiItem = (props) => {
     <div className="App">
       <ul >
         {emojiArr.map((item) => (
-		console.log(	<p>{item.title} {item.symbol}</p>)
-		
+		<p>{item.title} {item.symbol}</p>	
         ))}
 	
       </ul>
