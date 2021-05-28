@@ -1,8 +1,6 @@
-
-import { useState } from "react";
 import emojiArr from '../JSON/emoji.json'
 
-export const Symbol = (props) => {
+export const EmojiItem = (props) => {
     return (
     <div className="App">
       <ul >
