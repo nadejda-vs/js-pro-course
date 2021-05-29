@@ -1,11 +1,9 @@
 import './App.css';
-import { EmojiItem } from './components';
-import { Input } from './components';
+import { Search } from './components';
 function App() {
 	return (
 		<div className="App">
-			<Input />
-			<EmojiItem />
+			<Search />
 		</div>
 	);
 }
