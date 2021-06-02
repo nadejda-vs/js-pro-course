@@ -9,8 +9,8 @@ export const Facebook = (props) => {
 			<p>{props.location}</p>
 			<p>{props.timeTextTime}</p>
 			<p>{props.timeTextDate}</p>
-			<Button buttonName="Like" onClickReply={() => alert('reply clicked')} />
-			<Button buttonName="Reply" />
+			<Button buttonName="Like" onClickReply={props.onPressLike} />
+			<Button buttonName="Reply" onClickReply={props.onPressReply} />
 		</div>
 	);
 };

@@ -12,12 +12,15 @@ function App() {
 				author="Leanne Graham "
 				href="#"
 			/>
+			<h1>TAsk2</h1>
 			<Facebook
 				name="Jason Kincaid"
 				postDescription="I have something insightful to say,as usual"
 				location="USA"
 				timeTextTime={time}
 				timeTextDate={date}
+				onPressLike={() => alert('Click Like')}
+				onPressReply={() => alert('Click reply')}
 			/>
 		</div>
 	);
