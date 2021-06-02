@@ -10,6 +10,7 @@ export const PostList = memo(() => {
 		const responsePost = await fetch(
 			'https://jsonplaceholder.typicode.com/posts'
 		);
+
 		const postsResponse = await responsePost.json();
 
 		const posts = postsResponse.map((post) => {
@@ -24,7 +25,11 @@ export const PostList = memo(() => {
 	return (
 		<ol>
 			{posts.map((item) => (
-				<Post username={item.username} title={item.title} body={item.body} />
+				<Post
+					username={item.user.username}
+					title={item.title}
+					body={item.body}
+				/>
 			))}
 		</ol>
 	);
