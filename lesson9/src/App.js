@@ -1,16 +1,16 @@
-
 import './App.css';
 
-import { Symbol } from './components/EmojiItem';
-// import {AddSymbol} from './components/json';
-function App() {
+import { EmojiItem, ListItem, Input } from './components';
 
+import emojiArr from './emoji.json';
+function App() {
 	return (
 		<div className="App">
 			<header className="App-header">
-				<h1>Title</h1>
-				<Symbol />
-		
+				<Input />
+				<h1>Title+Symbols</h1>
+				<EmojiItem />
+				<ListItem array={emojiArr} />
 			</header>
 		</div>
 	);
