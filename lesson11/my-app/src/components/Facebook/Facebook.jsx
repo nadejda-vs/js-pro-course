@@ -1,7 +1,6 @@
 import { Button } from '../Button';
 
 export const Facebook = (props) => {
-	//  name, postDescription, location, timeText,
 	return (
 		<div className="facebook-task">
 			<h1>{props.name}</h1>
