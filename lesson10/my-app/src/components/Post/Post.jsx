@@ -1,9 +1,9 @@
-export const Post = (props) => {
+export const Post = ({ username, title, body }) => {
 	return (
 		<div>
-			<li> {props.username}</li>
-			<li> {props.title}</li>
-			<li> {props.body}</li>
+			<li> {username}</li>
+			<li> {title}</li>
+			<li> {body}</li>
 		</div>
 	);
 };
