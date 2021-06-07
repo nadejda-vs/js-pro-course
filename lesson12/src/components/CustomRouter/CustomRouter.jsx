@@ -1,15 +1,15 @@
 import React from 'react';
 import { BrowserRouter as Router, Switch, Route, Link } from 'react-router-dom';
-import { Search } from '../componentslesson9';
+// import { Search } from '../componentslesson9';
 import { PostList } from '../componentslesson10';
 import { Post, Facebook } from '../componentslesson11';
-export default function CustomRouter() {
+export const CustomRouter = () => {
 	return (
 		<Router>
 			<div>
 				<ul>
 					<li>
-						<Link to="/">Lesson9</Link>
+						<Link to="/">First page</Link>
 					</li>
 					<li>
 						<Link to="/Lesson10">Lesson10</Link>
@@ -35,14 +35,10 @@ export default function CustomRouter() {
 			</div>
 		</Router>
 	);
-}
+};
 
 function Lesson9() {
-	return (
-		<div>
-			<Search />
-		</div>
-	);
+	return <div>ldekfk</div>;
 }
 
 function Lesson10() {
