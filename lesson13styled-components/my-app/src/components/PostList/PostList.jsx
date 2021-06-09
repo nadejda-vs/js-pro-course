@@ -1,39 +1,53 @@
 import { useEffect, useState, memo } from 'react';
 import { Post } from '../Post';
 import styled from 'styled-components';
+import { Modal } from '../index';
+
 export const PostList = memo(() => {
 	const [posts, setPosts] = useState([]);
-
+	const [isModalOpened, setIsModalOpened] = useState(false);
+	const onClickPost = ([]) => {
+		setPosts([]);
+		setIsModalOpened(true);
+	};
+	const closeModal = () => {
+		setIsModalOpened(false);
+	};
 	useEffect(async () => {
 		const response = await fetch('https://jsonplaceholder.typicode.com/users');
 		const usersResponse = await response.json();
 		const responsePost = await fetch(
 			'https://jsonplaceholder.typicode.com/posts'
 		);
-
 		const postsResponse = await responsePost.json();
-
 		const posts = postsResponse.map((post) => {
 			const user = usersResponse.find((user) => user.id === post.userId);
-
 			return { ...post, user };
 		});
-
 		setPosts(posts);
 	}, []);
 
 	return (
-		<ol>
-			<Container>
-				{posts.map((item) => (
-					<Post
-						username={item.user.username}
-						title={item.title}
-						body={item.body}
-					/>
-				))}
-			</Container>
-		</ol>
+		<>
+			{isModalOpened ? (
+				<Modal closeModal={closeModal}>
+					<Post username={setPosts} onClick={onClickPost()} />
+				</Modal>
+			) : null}{' '}
+			<ol>
+				<Container>
+					{posts.map((item, index) => (
+						<Post
+							key={index}
+							username={item.user.username}
+							title={item.title}
+							body={item.body}
+							onClick={onClickPost(item.title)}
+						/>
+					))}
+				</Container>
+			</ol>
+		</>
 	);
 });
 
