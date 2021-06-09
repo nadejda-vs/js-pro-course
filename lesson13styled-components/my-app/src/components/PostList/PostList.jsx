@@ -36,6 +36,7 @@ export const PostList = memo(() => {
 		</ol>
 	);
 });
+
 const Container = styled.div`
 	justify-content: center;
 	background-color: #bababa;
@@ -47,6 +48,5 @@ const Container = styled.div`
 	grid-template-columns: 1fr 1fr 1fr;
 	grid-gap: 2vw;
 	padding: 0.5em;
-
 	color: rgb(26, 23, 26);
 `;
