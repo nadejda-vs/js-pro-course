@@ -1,12 +1,9 @@
-import { Modal, PostList } from './components';
+import { PostList } from './components';
 import './App.css';
 function App() {
 	return (
 		<header className="App-header">
-			<Modal>
-				<PostList />
-				<Modal />
-			</Modal>
+			<PostList />
 		</header>
 	);
 }

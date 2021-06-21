@@ -2,51 +2,67 @@ import { useEffect, useState, memo } from 'react';
 import { Post } from '../Post';
 import styled from 'styled-components';
 import { Modal } from '../index';
+import { User } from './User';
 
 export const PostList = memo(() => {
 	const [posts, setPosts] = useState([]);
 	const [isModalOpened, setIsModalOpened] = useState(false);
-	const onClickPost = ([]) => {
-		setPosts([]);
+	const [user, setUser] = useState();
+
+	const onClickPost = (user) => {
+		setUser(user);
 		setIsModalOpened(true);
 	};
+
 	const closeModal = () => {
 		setIsModalOpened(false);
 	};
+
 	useEffect(async () => {
 		const response = await fetch('https://jsonplaceholder.typicode.com/users');
 		const usersResponse = await response.json();
 		const responsePost = await fetch(
 			'https://jsonplaceholder.typicode.com/posts'
 		);
+		console.log(usersResponse);
 		const postsResponse = await responsePost.json();
+		console.log(postsResponse);
 		const posts = postsResponse.map((post) => {
 			const user = usersResponse.find((user) => user.id === post.userId);
 			return { ...post, user };
 		});
+		console.log(posts);
 		setPosts(posts);
 	}, []);
 
 	return (
 		<>
-			{isModalOpened ? (
+			{isModalOpened && posts ? (
 				<Modal closeModal={closeModal}>
-					<Post username={setPosts} onClick={onClickPost()} />
+					<User
+						name={user.name}
+						username={user.username}
+						email={user.email}
+						phone={user.phone}
+						website={user.website}
+					/>
 				</Modal>
-			) : null}{' '}
-			<ol>
-				<Container>
-					{posts.map((item, index) => (
-						<Post
-							key={index}
-							username={item.user.username}
-							title={item.title}
-							body={item.body}
-							onClick={onClickPost(item.title)}
-						/>
-					))}
-				</Container>
-			</ol>
+			) : null}
+			<Container>
+				<ol>
+					{posts &&
+						posts.map((item, index) => (
+							<Post
+								key={index}
+								username={item.user.username}
+								title={item.title}
+								body={item.body}
+								onClick={onClickPost}
+								user={item.user}
+							/>
+						))}
+				</ol>
+			</Container>
 		</>
 	);
 });

@@ -1,10 +1,10 @@
 import styled from 'styled-components';
-export const Modal = (closeModal) => {
+export const Modal = ({ children, closeModal }) => {
 	return (
 		<Background onClick={closeModal}>
 			<Container onClick={(event) => event.stopPropagation()}>
 				<button onClick={closeModal}>close</button>
-				{/* {children} */}
+				{children}
 			</Container>
 		</Background>
 	);
