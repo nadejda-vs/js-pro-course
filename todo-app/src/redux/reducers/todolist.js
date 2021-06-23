@@ -27,7 +27,7 @@ export function todolistReducer(state, action) {
     case ACTIONS.REMOVE_ITEM: {
       let newTodos = state.todos.filter(
         (todo) => {
-          if (todo.id === idishnik) {
+          if (todo.id === action.idishnik) {
             return false;
           } else {
             return true;
