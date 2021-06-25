@@ -28,7 +28,7 @@ export const Todolist = () => {
   const dispatch = useDispatch();
 
   const todos = useSelector(
-    (store) => store.todos,
+    (store) => store.todolistReducer.todos,
   );
 
   console.log({ todos });
@@ -65,43 +65,26 @@ export const Todolist = () => {
     selected,
     idishnik,
   }) => {
-    // console.log('setSelected Todolist');
-    setTodos(
-      todos.map((item) =>
-        item?.id === idishnik
-          ? { ...item, selected }
-          : item,
-      ),
-    );
-  };
-
-  const removeItem = ({ checked, idishnik }) => {
     dispatch({
-      type: ACTIONS.REMOVE_ITEM,
-      checked,
+      type: ACTIONS.SET_SELECTED,
+      selected,
       idishnik,
     });
-    setTodos(
-      todos.filter((todo) => {
-        if (todo.id === idishnik) {
-          return false;
-        }
+    // console.log('setSelected Todolist');
+  };
 
-        return true;
-      }),
-    );
+  const removeItem = (idishnik) => {
+    dispatch({
+      type: ACTIONS.REMOVE_ITEM,
+
+      idishnik,
+    });
   };
 
   const deleteAllSelected = () => {
-    setTodos(
-      todos.filter((todo) => {
-        if (todo.selected) {
-          return false;
-        }
-
-        return true;
-      }),
-    );
+    dispatch({
+      type: ACTIONS.DELETE_ALL_SELECTED,
+    });
   };
 
   const checkAllSelected = () => {

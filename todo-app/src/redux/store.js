@@ -1,12 +1,35 @@
-import { createStore } from 'redux';
+import {
+  createStore,
+  combineReducers,
+  applyMiddleware,
+  compose,
+} from 'redux';
 
-import { todolistReducer } from './reducers';
+import createSagaMiddleware from 'redux-saga';
+import { postsSaga } from './sagas';
+
+import {
+  todolistReducer,
+  photosReducer,
+} from './reducers';
+
+const sagaMiddleware = createSagaMiddleware();
+
+const composeEnhancers =
+  window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ ||
+  compose;
 
 export const store = createStore(
-  todolistReducer,
-  window.__REDUX_DEVTOOLS_EXTENSION__ &&
-    window.__REDUX_DEVTOOLS_EXTENSION__(),
+  combineReducers({
+    todolistReducer,
+    photosReducer,
+  }),
+  composeEnhancers(
+    applyMiddleware(sagaMiddleware),
+  ),
 );
+
+sagaMiddleware.run(postsSaga);
 
 //store.getState() - возвращает весь store
 //store.dispath(action) - для диспатча экшенов

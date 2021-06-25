@@ -1,11 +1,20 @@
 import { useEffect, useState, memo } from 'react';
+import {
+  useDispatch,
+  useSelector,
+} from 'react-redux';
 import { useHistory } from 'react-router-dom';
 
 import { Modal } from './components/Modal';
+import { ACTIONS } from './redux/constants';
 
 export const UserList = memo(() => {
-  const [users, setUsers] = useState([]);
   const history = useHistory();
+  const dispath = useDispatch();
+  const photos = useSelector(
+    (state) => state.photosReducer.photos,
+  );
+  console.log({ photos });
 
   const [isModalOpened, setIsModalOpened] =
     useState(false);
@@ -14,12 +23,7 @@ export const UserList = memo(() => {
     useState('');
 
   useEffect(async () => {
-    const response = await fetch(
-      'https://jsonplaceholder.typicode.com/photos',
-    );
-    const usersResponse = await response.json();
-
-    setUsers(usersResponse);
+    dispath({ type: ACTIONS.GET_PHOTOS_REQUEST });
   }, []);
 
   const onClickImage = (url) => {
@@ -48,7 +52,7 @@ export const UserList = memo(() => {
         Open todo list
       </button>
       <ol>
-        {users.map((item, index) => (
+        {photos.map((item, index) => (
           <Img
             key={index}
             urlec={item.url}
