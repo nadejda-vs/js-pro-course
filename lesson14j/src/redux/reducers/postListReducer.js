@@ -1,12 +1,12 @@
 import { ACTIONS } from '../constants';
-const defaultState = {
-	posts: [],
-	erorr: null,
-};
+
+const defaultState = { posts: [] };
+
 export function postListReducer(state, action) {
 	switch (action.type) {
-		case value:
-			break;
+		case ACTIONS.GET_POSTS_SUCCESS: {
+			return { ...state, posts: action.posts };
+		}
 
 		default:
 			return defaultState;
