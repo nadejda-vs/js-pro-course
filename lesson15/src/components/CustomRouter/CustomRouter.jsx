@@ -3,8 +3,7 @@ import { BrowserRouter as Router, Switch, Route, Link } from 'react-router-dom';
 import { Post } from '../componentslesson10/Post';
 import { PostList } from '../componentslesson10';
 import { Facebook } from '../componentslesson11';
-import { Provider } from 'react-redux';
-import { store } from '../componentslesson10/redux';
+
 export const CustomRouter = () => {
 	return (
 		<Router>
@@ -20,15 +19,13 @@ export const CustomRouter = () => {
 						<Link to="/Lesson11">Lesson11</Link>
 					</li>
 				</ul>
-
 				<hr />
 
 				<Switch>
-					<Route exact path="/">
-						<Lesson9 />
+					<Route exact path="/post/:id">
+						{/* <Post /> */}
 					</Route>
-					<Route exact path="/Lesson10/posts/:id">
-						<Post />
+					<Route exact path="/Lesson10/">
 						<Lesson10 />
 					</Route>
 					<Route exact path="/Lesson11">
@@ -41,7 +38,7 @@ export const CustomRouter = () => {
 };
 
 function Lesson9() {
-	return <div>ldekfk</div>;
+	return <div>First Page</div>;
 }
 
 function Lesson10() {

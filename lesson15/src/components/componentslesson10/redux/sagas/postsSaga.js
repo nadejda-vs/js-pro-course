@@ -20,7 +20,7 @@ function* getPostsSaga() {
 		yield put({ type: 'GET_POSTS_FAILURE', error: e.message });
 	}
 }
-function* getOnePhotoSaga(action) {
+function* getOnePostSaga(action) {
 	try {
 		const responsePost = yield call(() =>
 			fetch(`https://jsonplaceholder.typicode.com/posts/${action.id}`)
@@ -34,5 +34,5 @@ function* getOnePhotoSaga(action) {
 }
 export function* postsSaga() {
 	yield takeEvery(ACTIONS.GET_POSTS_REQUEST, getPostsSaga);
-	yield takeEvery(ACTIONS.GET_ONE_POST_REQUEST, getOnePhotoSaga);
+	yield takeEvery(ACTIONS.GET_ONE_POST_REQUEST, getOnePostSaga);
 }

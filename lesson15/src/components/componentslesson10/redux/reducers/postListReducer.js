@@ -1,6 +1,6 @@
 import { ACTIONS } from '../constants';
 
-const defaultState = { posts: [], error: null, photo: {} };
+const defaultState = { posts: [], error: null, post: {} };
 
 export function postListReducer(state, action) {
 	switch (action.type) {
@@ -11,7 +11,7 @@ export function postListReducer(state, action) {
 		case ACTIONS.GET_POSTS_FAILURE: {
 			return { ...state, error: action.error };
 		}
-		case ACTIONS.GET_ONE_POST_REQUEST: {
+		case ACTIONS.GET_ONE_POST_SUCCESS: {
 			return { ...state, post: action.post };
 		}
 

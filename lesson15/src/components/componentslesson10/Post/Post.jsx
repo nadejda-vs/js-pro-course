@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-export const Post = ({ username, title, body, onClick, user }) => {
+export const Post = ({ username, title, body, onClick, user, id }) => {
 	const onClickPost = () => {
 		onClick(user);
 	};
@@ -10,7 +10,7 @@ export const Post = ({ username, title, body, onClick, user }) => {
 				<h5> {title}</h5>
 			</li>
 			<li> {body}</li>
-
+			<li> {id}</li>
 			<button onClick={onClickPost}>{username}</button>
 		</Background>
 	);
