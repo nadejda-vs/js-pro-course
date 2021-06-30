@@ -57,8 +57,7 @@ const Post = ({ title, body, onClick, id }) => {
 	};
 
 	return (
-		<Background>
-			{onClickPost}
+		<Background onClick={onClickPost}>
 			<li>
 				<h5> {title}</h5>
 			</li>
