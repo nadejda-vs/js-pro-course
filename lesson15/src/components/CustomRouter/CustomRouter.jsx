@@ -1,18 +1,17 @@
 import React from 'react';
 import { BrowserRouter as Router, Switch, Route, Link } from 'react-router-dom';
-import { Post } from '../componentslesson10/Post';
+import { User } from '../componentslesson10/User';
 import { PostList } from '../componentslesson10';
 import { Facebook } from '../componentslesson11';
-import { Provider } from 'react-redux';
-import { store } from '../componentslesson10/redux';
+
 export const CustomRouter = () => {
 	return (
 		<Router>
 			<div>
 				<ul>
-					<li>
+					{/* <li>
 						<Link to="/">First page</Link>
-					</li>
+					</li> */}
 					<li>
 						<Link to="/Lesson10">Lesson10</Link>
 					</li>
@@ -20,15 +19,13 @@ export const CustomRouter = () => {
 						<Link to="/Lesson11">Lesson11</Link>
 					</li>
 				</ul>
-
 				<hr />
 
 				<Switch>
-					<Route exact path="/">
-						<Lesson9 />
+					<Route exact path="/users/:id">
+						<User />
 					</Route>
-					<Route exact path="/Lesson10/posts/:id">
-						<Post />
+					<Route exact path="/Lesson10/">
 						<Lesson10 />
 					</Route>
 					<Route exact path="/Lesson11">
@@ -40,9 +37,9 @@ export const CustomRouter = () => {
 	);
 };
 
-function Lesson9() {
-	return <div>ldekfk</div>;
-}
+// function Lesson9() {
+// 	return <div>First Page</div>;
+// }
 
 function Lesson10() {
 	return (
@@ -57,14 +54,6 @@ function Lesson11() {
 	const time = new Date().toLocaleTimeString();
 	return (
 		<div>
-			{/* <Post
-				title="sunt aut facere repellat...."
-				subtitle="quia et suscipit recusandae"
-				author="Leanne Graham "
-				href="#"
-			/>
-			<h1>TAsk2</h1> */}
-
 			<Facebook
 				name="Jason Kincaid"
 				postDescription="I have something insightful to say,as usual"

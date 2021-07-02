@@ -1,32 +1,22 @@
-import { useEffect, useState, memo } from 'react';
-// import { Post } from '../Post';
+import { useEffect, memo } from 'react';
+
 import styled from 'styled-components';
-import { useHistory, useParams } from 'react-router-dom';
-// import { User } from './User';
+import { useHistory } from 'react-router-dom';
+
 import { useDispatch, useSelector } from 'react-redux';
-// import { postsSaga } from '../../redux/sagas';
+
 import { ACTIONS } from '../redux/constants';
 
 export const PostList = memo(() => {
-	// const [posts, setPosts] = useState([]);
-
 	const dispatch = useDispatch();
-	const history = useHistory();
 
-	const [user, setUser] = useState();
+	// const [user, setUser] = useState();
 	const posts = useSelector((state) => state.postListReducer.posts);
 	console.log({ posts });
 
 	const error = useSelector((state) => state.postListReducer.error);
 
-	// const [isModalOpened, setIsModalOpened] = useState(false);
-
-	const onClickPost = (user) => {
-		setUser(user);
-		// setIsModalOpened(true);
-	};
-
-	useEffect(async () => {
+	useEffect(() => {
 		dispatch({ type: ACTIONS.GET_POSTS_REQUEST });
 	}, []);
 	useEffect(() => {
@@ -42,25 +32,33 @@ export const PostList = memo(() => {
 					posts.map((item, index) => (
 						<Post
 							key={index}
-							// username={item.user.username}
 							title={item.title}
 							body={item.body}
-							onClick={onClickPost}
-							user={item.user}
+							userId={item.user}
+							id={item.id}
 						/>
 					))}
 			</ol>
 		</Container>
 	);
 });
-const Post = ({ onClick, id }) => {
+
+const Post = ({ title, body, userId, id }) => {
 	const history = useHistory();
 
-	const onClickPost = () => {
-		history.push(`/posts/${id}`);
+	const onClickShowUser = () => {
+		history.push(`/users/${id}`);
 	};
 
-	return <Post onClick={onClickPost} />;
+	return (
+		<Background>
+			<li>
+				<h5> {title}</h5>
+			</li>
+			<li> {body}</li>
+			<button onClick={onClickShowUser}>Show user</button>
+		</Background>
+	);
 };
 
 const Container = styled.div`
@@ -75,4 +73,10 @@ const Container = styled.div`
 	grid-gap: 2vw;
 	padding: 0.5em;
 	color: rgb(26, 23, 26);
+`;
+const Background = styled.p`
+	background-color: #dedede;
+	list-style: none;
+
+	border: 1px inset black;
 `;
