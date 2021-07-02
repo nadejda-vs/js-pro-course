@@ -20,19 +20,20 @@ function* getPostsSaga() {
 		yield put({ type: 'GET_POSTS_FAILURE', error: e.message });
 	}
 }
-function* getOnePostSaga(action) {
+function* getUserSaga(action) {
 	try {
 		const responsePost = yield call(() =>
-			fetch(`https://jsonplaceholder.typicode.com/posts/${action.id}`)
+			fetch(`https://jsonplaceholder.typicode.com/users/${action.id}`)
 		);
-		const post = yield responsePost.json();
+		const user = yield responsePost.json();
 		yield put({
-			type: ACTIONS.GET_ONE_POST_SUCCESS,
-			post,
+			type: ACTIONS.GET_USER_SUCCESS,
+			user,
 		});
+		console.log({ user });
 	} catch (e) {}
 }
 export function* postsSaga() {
 	yield takeEvery(ACTIONS.GET_POSTS_REQUEST, getPostsSaga);
-	yield takeEvery(ACTIONS.GET_ONE_POST_REQUEST, getOnePostSaga);
+	yield takeEvery(ACTIONS.GET_USER_REQUEST, getUserSaga);
 }

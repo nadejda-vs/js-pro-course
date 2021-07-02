@@ -1,4 +1,4 @@
-import { useEffect, useState, memo } from 'react';
+import { useEffect, memo } from 'react';
 
 import styled from 'styled-components';
 import { useHistory } from 'react-router-dom';
@@ -10,16 +10,11 @@ import { ACTIONS } from '../redux/constants';
 export const PostList = memo(() => {
 	const dispatch = useDispatch();
 
-	const [user, setUser] = useState();
+	// const [user, setUser] = useState();
 	const posts = useSelector((state) => state.postListReducer.posts);
 	console.log({ posts });
 
 	const error = useSelector((state) => state.postListReducer.error);
-
-	const onClickPost = (user) => {
-		setUser(user);
-		// setIsModalOpened(true);
-	};
 
 	useEffect(() => {
 		dispatch({ type: ACTIONS.GET_POSTS_REQUEST });
@@ -37,11 +32,9 @@ export const PostList = memo(() => {
 					posts.map((item, index) => (
 						<Post
 							key={index}
-							// username={item.user.username}
 							title={item.title}
 							body={item.body}
-							onClick={onClickPost}
-							user={item.user}
+							userId={item.user}
 							id={item.id}
 						/>
 					))}
@@ -49,19 +42,21 @@ export const PostList = memo(() => {
 		</Container>
 	);
 });
-const Post = ({ title, body, onClick, id }) => {
+
+const Post = ({ title, body, userId, id }) => {
 	const history = useHistory();
 
-	const onClickPost = () => {
-		history.push(`/posts/${id}`);
+	const onClickShowUser = () => {
+		history.push(`/users/${id}`);
 	};
 
 	return (
-		<Background onClick={onClickPost}>
+		<Background>
 			<li>
 				<h5> {title}</h5>
 			</li>
 			<li> {body}</li>
+			<button onClick={onClickShowUser}>Show user</button>
 		</Background>
 	);
 };

@@ -1,6 +1,6 @@
 import React from 'react';
 import { BrowserRouter as Router, Switch, Route, Link } from 'react-router-dom';
-import { Post } from '../componentslesson10/Post';
+import { User } from '../componentslesson10/User';
 import { PostList } from '../componentslesson10';
 import { Facebook } from '../componentslesson11';
 
@@ -9,9 +9,9 @@ export const CustomRouter = () => {
 		<Router>
 			<div>
 				<ul>
-					<li>
+					{/* <li>
 						<Link to="/">First page</Link>
-					</li>
+					</li> */}
 					<li>
 						<Link to="/Lesson10">Lesson10</Link>
 					</li>
@@ -22,8 +22,8 @@ export const CustomRouter = () => {
 				<hr />
 
 				<Switch>
-					<Route exact path="/post/:id">
-						{/* <Post /> */}
+					<Route exact path="/users/:id">
+						<User />
 					</Route>
 					<Route exact path="/Lesson10/">
 						<Lesson10 />
@@ -37,9 +37,9 @@ export const CustomRouter = () => {
 	);
 };
 
-function Lesson9() {
-	return <div>First Page</div>;
-}
+// function Lesson9() {
+// 	return <div>First Page</div>;
+// }
 
 function Lesson10() {
 	return (
@@ -54,14 +54,6 @@ function Lesson11() {
 	const time = new Date().toLocaleTimeString();
 	return (
 		<div>
-			{/* <Post
-				title="sunt aut facere repellat...."
-				subtitle="quia et suscipit recusandae"
-				author="Leanne Graham "
-				href="#"
-			/>
-			<h1>TAsk2</h1> */}
-
 			<Facebook
 				name="Jason Kincaid"
 				postDescription="I have something insightful to say,as usual"
