@@ -7,18 +7,16 @@ function* getPostsSaga() {
 		const responsePost = yield call(() =>
 			fetch('https://jsonplaceholder.typicode.com/posts')
 		);
-		const postsResponse = yield responsePost.json();
-		///убрать в другой генератор
-		// const responseUser = yield call(() =>
-		// 	fetch('https://jsonplaceholder.typicode.com/users')
-		// );
-		// const userResponse = yield responseUser.json();
+		const posts = yield responsePost.json();
+		throw new Error('У кого-то руки не из того места');
 		yield put({
 			type: ACTIONS.GET_POSTS_SUCCESS,
-			postsResponse,
+			posts,
 		});
-		console.log({ postsResponse });
-	} catch (e) {}
+		console.log({ posts });
+	} catch (e) {
+		yield put({ type: 'GET_POSTS_FAILURE', error: e.message });
+	}
 }
 export function* postsSaga() {
 	yield takeEvery(ACTIONS.GET_POSTS_REQUEST, getPostsSaga);

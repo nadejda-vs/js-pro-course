@@ -15,6 +15,8 @@ export const PostList = memo(() => {
 	const posts = useSelector((state) => state.postListReducer.posts);
 	console.log({ posts });
 
+	const error = useSelector((state) => state.postListReducer.error);
+
 	const onClickPost = (user) => {
 		setUser(user);
 		setIsModalOpened(true);
@@ -26,22 +28,11 @@ export const PostList = memo(() => {
 	useEffect(async () => {
 		dispatch({ type: ACTIONS.GET_POSTS_REQUEST });
 	}, []);
-	// useEffect(async () => {
-	// 	// const response = await fetch('https://jsonplaceholder.typicode.com/users');
-	// 	// const usersResponse = await response.json();
-	// 	// const responsePost = await fetch(
-	// 	// 	'https://jsonplaceholder.typicode.com/posts'
-	// 	// );
-	// 	// console.log(usersResponse);
-	// 	// const postsResponse = await responsePost.json();
-	// 	// // console.log(postsResponse);
-	// 	// const posts = postsResponse.map((post) => {
-	// 	// 	const user = usersResponse.find((user) => user.id === post.userId);
-	// 	// 	return { ...post, user };
-	// 	// });
-	// 	// console.log(posts);
-	// 	// postsSaga();
-	// }, []);
+	useEffect(() => {
+		if (error) {
+			alert(error);
+		}
+	}, [error]);
 
 	return (
 		<>
@@ -62,7 +53,7 @@ export const PostList = memo(() => {
 						posts.map((item, index) => (
 							<Post
 								key={index}
-								username={item.user.username}
+								// username={item.user.username}
 								title={item.title}
 								body={item.body}
 								onClick={onClickPost}
